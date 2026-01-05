@@ -1,38 +1,28 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowUpRight } from "lucide-react";
 
 const CTASection = () => {
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 gradient-bg opacity-10" />
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-accent/30 rounded-full blur-3xl" />
-
-      <div className="container mx-auto px-4 relative">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-            Ready to Start Your{" "}
-            <span className="gradient-text">Digital Journey?</span>
+    <section className="py-32 bg-primary">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="text-uppercase-sm text-primary-foreground/70 mb-6 block">
+            Start a Project
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-8">
+            Let's work together and create something amazing
           </h2>
-          <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
-            Let's collaborate to bring your vision to life. Get in touch with us today 
-            and discover how we can transform your ideas into reality.
+          <p className="text-lg text-primary-foreground/80 mb-12 max-w-xl mx-auto">
+            Ready to transform your digital presence? Get in touch and let's discuss 
+            how we can bring your vision to life.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact">
-              <Button size="lg" className="gradient-bg text-white hover:opacity-90 transition-opacity px-8">
-                Get Free Consultation
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Link to="/portfolio">
-              <Button size="lg" variant="outline" className="px-8">
-                Explore Our Work
-              </Button>
-            </Link>
-          </div>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-background text-foreground hover:bg-foreground hover:text-background transition-all group"
+          >
+            <span className="text-sm uppercase tracking-wide font-medium">Get In Touch</span>
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </Link>
         </div>
       </div>
     </section>

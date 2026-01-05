@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
@@ -37,91 +36,79 @@ const TestimonialsSection = () => {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  useEffect(() => {
-    const interval = setInterval(nextTestimonial, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="py-24">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="text-primary font-medium mb-2 block">Testimonials</span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            What Our <span className="gradient-text">Clients Say</span>
-          </h2>
+        <div className="sec-head">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+              <span className="text-uppercase-sm mb-4 block">Testimonials</span>
+              <h2 className="text-4xl md:text-5xl font-bold uppercase">
+                <span className="text-muted-foreground">Client</span> Feedback.
+              </h2>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={prevTestimonial}
+                className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={nextTestimonial}
+                className="w-12 h-12 rounded-full border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Testimonial Card */}
-        <div className="max-w-4xl mx-auto relative">
-          <div className="glass-card rounded-2xl p-8 md:p-12">
-            <Quote className="h-12 w-12 text-primary/20 mb-6" />
-            
-            <div className="relative overflow-hidden min-h-[200px]">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={testimonial.id}
-                  className={`transition-all duration-500 ${
-                    index === currentIndex
-                      ? "opacity-100 translate-x-0"
-                      : "opacity-0 absolute inset-0 translate-x-10"
-                  }`}
-                >
-                  <p className="text-lg md:text-xl leading-relaxed mb-8">
-                    "{testimonial.content}"
-                  </p>
+        {/* Testimonial Content */}
+        <div className="max-w-4xl">
+          <div className="relative overflow-hidden min-h-[250px]">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={testimonial.id}
+                className={`transition-all duration-500 ${
+                  index === currentIndex
+                    ? "opacity-100 translate-x-0"
+                    : "opacity-0 absolute inset-0 translate-x-10"
+                }`}
+              >
+                <p className="text-2xl md:text-3xl lg:text-4xl leading-relaxed mb-12">
+                  "{testimonial.content}"
+                </p>
 
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={testimonial.avatar}
-                      alt={testimonial.author}
-                      className="w-14 h-14 rounded-full object-cover"
-                    />
-                    <div>
-                      <h4 className="font-display font-semibold">{testimonial.author}</h4>
-                      <p className="text-muted-foreground text-sm">{testimonial.role}</p>
-                    </div>
+                <div className="flex items-center gap-4">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.author}
+                    className="w-14 h-14 rounded-full object-cover"
+                  />
+                  <div>
+                    <h4 className="font-medium">{testimonial.author}</h4>
+                    <p className="text-muted-foreground text-sm">{testimonial.role}</p>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            {/* Navigation */}
-            <div className="flex items-center justify-between mt-8">
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentIndex
-                        ? "w-8 bg-primary"
-                        : "bg-muted-foreground/30"
-                    }`}
-                  />
-                ))}
               </div>
+            ))}
+          </div>
 
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={prevTestimonial}
-                  className="rounded-full"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={nextTestimonial}
-                  className="rounded-full"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </Button>
-              </div>
-            </div>
+          {/* Dots */}
+          <div className="flex gap-2 mt-12">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-1 rounded-full transition-all ${
+                  index === currentIndex
+                    ? "w-8 bg-primary"
+                    : "w-4 bg-border"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>

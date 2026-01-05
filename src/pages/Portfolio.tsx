@@ -2,153 +2,120 @@ import { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
-const categories = ["All", "Web Development", "Mobile Apps", "UI/UX Design", "E-commerce"];
+const categories = ["All", "Web", "Mobile", "Branding", "E-commerce"];
 
 const projects = [
   {
     id: 1,
     title: "TechFlow Dashboard",
-    category: "Web Development",
-    client: "TechFlow Inc.",
+    category: "Web",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    description: "A comprehensive analytics dashboard for enterprise clients with real-time data visualization.",
-    technologies: ["React", "Node.js", "PostgreSQL"],
+    description: "A comprehensive analytics dashboard for enterprise clients.",
   },
   {
     id: 2,
     title: "FitLife Mobile App",
-    category: "Mobile Apps",
-    client: "FitLife Health",
+    category: "Mobile",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop",
-    description: "Fitness tracking app with AI-powered workout recommendations and social features.",
-    technologies: ["React Native", "Firebase", "TensorFlow"],
+    description: "Fitness tracking app with AI-powered workout recommendations.",
   },
   {
     id: 3,
     title: "EcoStore Platform",
     category: "E-commerce",
-    client: "EcoStore Global",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
-    description: "Sustainable e-commerce platform with carbon footprint tracking and eco-friendly shipping.",
-    technologies: ["Next.js", "Stripe", "Shopify"],
+    description: "Sustainable e-commerce platform with carbon footprint tracking.",
   },
   {
     id: 4,
-    title: "FinanceHub Redesign",
-    category: "UI/UX Design",
-    client: "FinanceHub Corp",
+    title: "FinanceHub",
+    category: "Web",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-    description: "Modern banking interface redesign focused on user experience and accessibility.",
-    technologies: ["Figma", "Principle", "React"],
+    description: "Modern banking interface redesign for a fintech startup.",
   },
   {
     id: 5,
-    title: "CloudSync Platform",
-    category: "Web Development",
-    client: "CloudSync Ltd",
-    image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&h=600&fit=crop",
-    description: "Enterprise cloud storage solution with advanced collaboration features.",
-    technologies: ["Vue.js", "Go", "AWS"],
+    title: "Luxe Brand Identity",
+    category: "Branding",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop",
+    description: "Complete brand identity for a luxury lifestyle company.",
   },
   {
     id: 6,
-    title: "TravelMate App",
-    category: "Mobile Apps",
-    client: "TravelMate Inc",
-    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=600&fit=crop",
-    description: "Travel planning app with AI itinerary builder and local recommendations.",
-    technologies: ["Flutter", "Node.js", "MongoDB"],
+    title: "HealthTrack App",
+    category: "Mobile",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop",
+    description: "Health monitoring application with wearable integration.",
   },
 ];
 
 const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const filteredProjects = activeCategory === "All"
-    ? projects
-    : projects.filter((project) => project.category === activeCategory);
+  const filteredProjects = projects.filter(
+    (project) => activeCategory === "All" || project.category === activeCategory
+  );
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
-        </div>
-
+      {/* Hero */}
+      <section className="pt-32 pb-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="text-primary font-medium mb-2 block">Our Portfolio</span>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-              Featured <span className="gradient-text">Projects</span>
+          <div className="max-w-5xl">
+            <span className="text-uppercase-sm mb-6 block">Our Work</span>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8">
+              Projects that{" "}
+              <span className="text-primary">inspire</span>{" "}
+              and deliver results
             </h1>
-            <p className="text-lg text-muted-foreground">
-              Explore our latest work and see how we've helped businesses 
-              achieve their digital transformation goals.
-            </p>
           </div>
         </div>
       </section>
 
-      {/* Filter & Projects */}
-      <section className="py-20">
+      {/* Filter */}
+      <section className="border-y border-border">
         <div className="container mx-auto px-4">
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap gap-2 py-6">
             {categories.map((category) => (
-              <Button
+              <button
                 key={category}
-                variant={activeCategory === category ? "default" : "outline"}
-                className={activeCategory === category ? "gradient-bg text-white" : ""}
                 onClick={() => setActiveCategory(category)}
+                className={`px-6 py-2 rounded-full text-sm uppercase tracking-wide transition-all ${
+                  activeCategory === category
+                    ? "bg-primary text-primary-foreground"
+                    : "border border-border hover:border-primary"
+                }`}
               >
                 {category}
-              </Button>
+              </button>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Projects Grid */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filteredProjects.map((project) => (
               <div
                 key={project.id}
-                className="group rounded-2xl overflow-hidden bg-card border border-border hover:border-primary/50 transition-all duration-300"
+                className="group relative aspect-[4/3] overflow-hidden rounded-2xl"
               >
-                {/* Image */}
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowUpRight className="h-5 w-5 text-white" />
-                  </div>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <span className="text-uppercase-sm mb-2 block">{project.category}</span>
+                  <h3 className="text-2xl font-medium mb-2">{project.title}</h3>
+                  <p className="text-muted-foreground">{project.description}</p>
                 </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs mb-3">
-                    {project.category}
-                  </span>
-                  <h3 className="font-display text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 rounded bg-secondary text-xs text-muted-foreground"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                <div className="absolute top-6 right-6 w-12 h-12 rounded-full border border-border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-background/50 backdrop-blur">
+                  <ArrowUpRight className="h-5 w-5" />
                 </div>
               </div>
             ))}
@@ -157,18 +124,17 @@ const Portfolio = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-secondary/50">
+      <section className="py-24 bg-primary">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-            Have a Project in Mind?
+          <h2 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-8">
+            Have a project in mind?
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-            Let's bring your vision to life. Get in touch to discuss your project.
-          </p>
-          <Link to="/contact">
-            <Button size="lg" className="gradient-bg text-white hover:opacity-90">
-              Start Your Project
-            </Button>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-background text-foreground hover:bg-foreground hover:text-background transition-all group"
+          >
+            <span className="text-sm uppercase tracking-wide font-medium">Let's Talk</span>
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
           </Link>
         </div>
       </section>
